@@ -10,6 +10,8 @@ class ScavTrap : public ClapTrap{
 		bool isGuard;
 
 	public:
+
+		ScavTrap();
 		ScavTrap(std::string _name);
 		ScavTrap(const ScavTrap& copy);
 		ScavTrap& operator=(const ScavTrap& copy);	

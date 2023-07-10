@@ -10,6 +10,7 @@ protected:
     unsigned int hitPoint;
     unsigned int damage;
 public:
+    ClapTrap();
     ClapTrap(std::string newName);
     ClapTrap(const ClapTrap& copy);
     ClapTrap& operator=(const ClapTrap& copy);
