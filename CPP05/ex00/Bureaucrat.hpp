@@ -3,21 +3,29 @@
 
 #include <iostream>
 
-class Bureaucrat{
-    private:
-        std::string const name;
-        int grade;
+class Bureaucrat
+{
+private:
+    const std::string name;
+    int grade;
+
+public:
+    Bureaucrat();
+    Bureaucrat(std::string Aname);
+    Bureaucrat(const Bureaucrat &copyName);
+    Bureaucrat &operator=(const Bureaucrat &copyName);
+    ~Bureaucrat();
+
+    int getGrade() { return (this->grade); }
+    std::string getName(void) { return (this->name); }
+
+    class GradeToHighExeption : public std::exception
+    {
     public:
-        Bureaucrat();
-        Bureaucrat(std::string Aname);
-        Bureaucrat(const Bureaucrat& copyName);
-        Bureaucrat& operator=(const Bureaucrat& copyName);
-        ~Bureaucrat();
-
-        int getGrade();
-        int GradeTooHighException();
-        int GradeTooLowException();
-        std::string getName(void);
+        const char* what() const throw();
+    };
 };
-
 #endif
+
+// exception class larını araştır
+// try - catch bloklarını arastır
