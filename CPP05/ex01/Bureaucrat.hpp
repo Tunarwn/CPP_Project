@@ -3,22 +3,19 @@
 
 #include <iostream>
 
-class Bureaucrat{
+class Bureaucrat
+{
 private:
-    std::string const name;
+    const std::string name;
     int grade;
-
 public:
-    Bureaucrat();
-    Bureaucrat(std::string Aname);
-    Bureaucrat(std::string Aname, int grade);
+    Bureaucrat(std::string Aname, int _grade);
     Bureaucrat(const Bureaucrat &copyName);
     Bureaucrat &operator=(const Bureaucrat &copyName);
     ~Bureaucrat();
 
-
-    int getGrade() { return (this->grade); }
-    std::string getName(void) { return (this->name); }
+    std::string getName() const;
+    int getGrade() const;
 
     class GradeTooHighException : public std::exception{
     public:
@@ -31,11 +28,13 @@ public:
     };
 
     void CheckGradeRange(int grade);
+
     void incrementGrade();
     void decrementGrade();
+    void signForm(const Form& copyForm);
 
 };
-
+    
 std::ostream& operator<<(std::ostream& os, Bureaucrat& bureaucrat);
 
 #endif
