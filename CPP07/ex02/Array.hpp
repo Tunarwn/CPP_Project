@@ -4,46 +4,53 @@
 template <typename T>
 class Array{
 private:
-    T& elements;
-    size_t arraySize;
-
+    T* elements;
+    size_t length;
+ 
 public:
-    Array() : elements(nullptr), arraySize(0){};
-
-    Array(unsigned int n) arraySize(n){
-        elements = new T[n];
+    Array() : length(0) {
+        elements = new T;
     };
 
-    Array(const Array<T>& other) : arraySize(other.arraySize){
-        elements = new T[arraySize];
-        for(unsigned int i = 0; i < arraySize; ++i)
-        elements[i] = other.elements[i];
+    Array(unsigned int n) : length(n){
+        elements = new T[length];
     };
 
-    Array<T>& operator=(const Array<T>& other) {
-        if(this != &other){
-            delete[] elements;
-            arraySize = other.arraySize;
-            elements = new T[arraySize];
-            for(unsigned int i = 0; i < arraySize; ++i)
-                elements[i] = other.elements[i];
-        }
+    Array(const Array& arrayCopy) : length(arrayCopy.length){
+        elements = new T[length];
+        for(size_t i = 0; i < length; i++)
+            elements[i] = arrayCopy.elements[i];
+    }
+
+    Array& operator=(const Array& arrayCopy){
+        if(this == &arrayCopy)
+            return *this;
+        delete[] elements;
+        length = arrayCopy.length;
+        elements = new T[length];
+        for(size_t i = 0; i < length; i++)
+            elements[i] = arrayCopy.elements[i];
         return *this;
-    };
+    }
 
     ~Array(){
         delete[] elements;
     }
 
-    Array<T>& operator[](unsigned int index){
-        if(index >= arraySize){
-            throw std::out_of_range("index out of bounds");
-        }
-        return elements[index];
+    T& operator[](size_t index) {
+        if(index >= length)
+            throw out_of_bounds();
+        return  elements[index];
     }
 
-    unsigned int size() const {
-        return arraySize;
+    class out_of_bounds : public std::exception{
+        const char* what() const throw(){
+            return ("\n<<< index is out of bounds >>>\n");
+        }
+    };
+
+    int size() const{
+        return length;
     }
 };
 
