@@ -1,12 +1,17 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+
 Form::Form() : name("Anonim"), gradeToSign(1), gradeToExecute(31) {
     //std::cout << "Default constructor called" << std::endl;
 }
 
 Form::Form(std::string name, int gradeSign, int gradeExecute) : name(name), gradeToSign(gradeSign), gradeToExecute(gradeExecute){
     //std::cout << "Name constructor called" << std::endl;
+    if(gradeSign < 1 || gradeExecute < 1)
+        throw GradeTooHighException();
+    else if(gradeSign > 150 || gradeExecute > 150)
+        throw GradeTooLowException();
 }
 
 Form::Form(const Form& copyForm) : name(copyForm.name), gradeToSign(copyForm.gradeToSign), gradeToExecute(copyForm. gradeToExecute), isSigned(copyForm.isSigned){
@@ -23,7 +28,7 @@ Form& Form::operator=(const Form& copyForm) {
 }
 
 Form::~Form() {
-    std::cout << "Default destructor called" << std::endl;
+    // std::cout << "Default destructor called" << std::endl;
 }
 
 std::string Form::getName() const{
@@ -45,7 +50,7 @@ void Form::beSigned(const Bureaucrat& copyBurea){
     if(copyBurea.getGrade() < gradeToSign)
         isSigned = true;
     else
-        throw GradeTooLowException();
+        throw NotEnoughSign();
 }
 
 std::ostream& operator<<(std::ostream& o, const Form& copyForm){

@@ -1,15 +1,33 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
-Bureaucrat::Bureaucrat(std::string Aname, int _grade) : name(Aname), grade(_grade)
-{}
+Bureaucrat::Bureaucrat(std::string Aname, int _grade) : name(Aname)
+{
+    if(_grade < 1)
+        throw GradeTooHighException();
+    else if(_grade > 150)
+        throw GradeTooLowException();
+    else
+        grade = _grade;
+}
 
-Bureaucrat::Bureaucrat(const Bureaucrat& copyName) : name(copyName.name) {
+Bureaucrat::Bureaucrat(const Bureaucrat& copyName) : name(copyName.name){
     // std::cout << "Copy constructor called" << std::endl;
+    if(copyName.grade < 1)
+        throw GradeTooHighException();
+    else if(copyName.grade > 150)
+        throw GradeTooLowException();
+    else
+        grade = copyName.grade;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& bureaucratCopy){
     const_cast<std::string&>(name) = (bureaucratCopy.name);
+    if(bureaucratCopy.grade < 1)
+        throw GradeTooHighException();
+    else if(bureaucratCopy.grade > 150)
+        throw GradeTooLowException();
+    else
+        grade = bureaucratCopy.grade;
     // std::cout << "Copy assignment operator called" << std::endl;
     return *this;
 }
@@ -31,13 +49,6 @@ std::ostream& operator<<(std::ostream& os, Bureaucrat& bureaucrat){
     return os;
 }
 
-void Bureaucrat::CheckGradeRange(int grade){
-    if(grade < 1)
-        throw GradeTooHighException();
-    else if(grade > 150)
-        throw GradeTooLowException();
-}
-
 void Bureaucrat::signForm(const Form& copyForm){
     if(copyForm.getIsSigned())
         std::cout << name << " signed " << copyForm.getName() << std::endl;
@@ -46,11 +57,17 @@ void Bureaucrat::signForm(const Form& copyForm){
 }
 
 void Bureaucrat::incrementGrade(){
-    CheckGradeRange(grade);
+    if(grade - 1 < 1)
+        throw GradeTooHighException();
+    else
+        grade--;
 }
 
 void Bureaucrat::decrementGrade(){
-    CheckGradeRange(grade);
+    if(grade + 1 > 150)
+        throw GradeTooLowException();
+    else
+        grade++;
 }
 
 int Bureaucrat::getGrade() const{

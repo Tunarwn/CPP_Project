@@ -9,6 +9,10 @@ private:
     int grade;
 
 public:
+
+    template <typename T>;
+
+    T kare( type);
     Bureaucrat();
     Bureaucrat(std::string Aname);
     Bureaucrat(std::string Aname, int grade);
@@ -31,6 +35,7 @@ public:
     };
 
     void CheckGradeRange(int grade);
+    int template(int tuna);
     void incrementGrade();
     void decrementGrade();
 

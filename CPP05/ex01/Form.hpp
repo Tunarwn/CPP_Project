@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+class Bureaucrat;
+
 class Form {
 private:
     const std::string name;
@@ -41,7 +43,6 @@ public:
 
 
 };
-
 std::ostream& operator<<(std::ostream& o, const Form& copyForm);
 
 #endif

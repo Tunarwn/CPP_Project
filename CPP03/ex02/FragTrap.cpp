@@ -9,16 +9,11 @@ FragTrap::FragTrap() : ClapTrap() {
     this->damage = 30;
 }
 
-FragTrap::FragTrap(const FragTrap& copy){
-    *this = copy;
+FragTrap::FragTrap(const FragTrap& copy) : ClapTrap(copy){
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& copy){
-    this->name = copy.name;
-    this->hitPoint = copy.hitPoint;
-    this->energyPoint = copy.energyPoint;
-    this->damage = copy.damage;
-
+    ClapTrap::operator=(copy);
     return *this;
 }
 

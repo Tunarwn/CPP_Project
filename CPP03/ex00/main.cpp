@@ -2,7 +2,9 @@
 
 int main() {
     ClapTrap tuna("Tuna");
-    ClapTrap emre("emre");
+    ClapTrap emre(tuna);
+
+
 
     tuna.attack("Enemy");
     emre.takeDamage(5);
