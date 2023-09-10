@@ -16,7 +16,7 @@ public:
         elements = new T[length];
     };
 
-    Array(const Array& arrayCopy) : length(arrayCopy.length){
+    Array(const Array& arrayCo py) : length(arrayCopy.length){
         elements = new T[length];
         for(size_t i = 0; i < length; i++)
             elements[i] = arrayCopy.elements[i];
