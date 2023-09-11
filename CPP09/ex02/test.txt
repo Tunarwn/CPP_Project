@@ -1,0 +1,3 @@
+main + pozitif integer dizisi          ./a.out 5 4 3 2 1
+av[1] -> (5 4 3 2 1) -->  gelen sayı hatalı mı(pozitif) --> container list/vector/deque
+container -> algoritma(merge-insert) -begin-bitis- gecen sure

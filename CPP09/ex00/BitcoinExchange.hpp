@@ -9,6 +9,8 @@
 #include <map>
 
 
+
+void inputData(const std::string& data1);
 void VeritabaniniOku(const std::string& data);
 
 
